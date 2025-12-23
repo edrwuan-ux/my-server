@@ -27,7 +27,7 @@ app.get('/license', (req, res) => {
     return res.json({ valid: true, ip, count: data[id].length });
   }
 
-  if (data[id].length >= 3) {
+  if (data[id].length >= 1) {
     return res.json({ valid: false, error: 'limit reached', ips: data[id] });
   }
 
@@ -37,4 +37,5 @@ app.get('/license', (req, res) => {
 });
 
 app.listen(3000, () => console.log('License server running on port 3000'));
+
 
