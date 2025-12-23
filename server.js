@@ -18,7 +18,7 @@ app.get('/license', (req, res) => {
   const id = req.query.id;
   if (!id) return res.json({ valid: false, error: 'missing id' });
 
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
   let data = loadData();
 
   if (!data[id]) data[id] = [];
@@ -37,3 +37,4 @@ app.get('/license', (req, res) => {
 });
 
 app.listen(3000, () => console.log('License server running on port 3000'));
+
